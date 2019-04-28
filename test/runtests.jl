@@ -11,4 +11,5 @@ end;
 
 @testset "Test 2" begin
     @test 1+1 == 2
+	@test add_two(1.0, 2.0) == 5
 end;
