@@ -1,3 +1,3 @@
-# HypergraphsLab.jl
+# HypergraphsRepository.jl
 
-Documentation for HypergraphsLab.jl
+Documentation for HypergraphsRepository.jl

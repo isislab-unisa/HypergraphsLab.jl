@@ -33,5 +33,7 @@ function evaluatehgproperties(h::Hypergraph; excludemodularity::Bool=false)
 end
 
 function evaluatetwosecproperties(h::Hypergraph)
+    t = TwoSectionView(h)
+
 
 end
