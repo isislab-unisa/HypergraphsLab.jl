@@ -1,4 +1,4 @@
-name = "HypergraphsLab"
+name = "HypergraphsRepository"
 uuid = "45aed820-69be-11e9-2cdc-49f63cc6b831"
 authors = ["aleant93 <aless.antelmi@gmail.com>"]
 version = "0.1.0"
@@ -7,4 +7,6 @@ version = "0.1.0"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 DocumenterTools = "35a29f4d-8980-5a13-9543-d66fff28ecb8"
 LightGraphs = "093fc24a-ae57-5d10-9952-331d41423f4d"
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
+SimpleHypergraphs = "aa4a32ff-dd5d-5357-90e3-e7a9512f0501"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
