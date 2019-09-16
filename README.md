@@ -1,4 +1,4 @@
-# HypergraphsLab.jl
+# HypergraphsRepository.jl
 
 *Some description here.*
 
