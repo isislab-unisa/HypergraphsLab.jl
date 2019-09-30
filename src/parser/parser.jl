@@ -19,3 +19,5 @@ export_json("hgdata/fb/steam.json", h_steam)
 h_gplus=loadgplus("graphdata/gplus/100129275726588145876.circles",Int,'\t')
 hg_save("hgdata/gplus/100129275726588145876.circles.hgf", h_gplus)
 export_json("hgdata/fb/100129275726588145876.circles.json", h_gplus)
+
+h_eu=load_eu_txt("graphdata/EUInstitute/email-Eu-core-department-labels.txt",Int128,' ')
