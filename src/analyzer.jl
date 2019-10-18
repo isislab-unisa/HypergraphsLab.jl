@@ -1,3 +1,5 @@
+using LightGraphs
+
 function evaluatehgproperties(h::Hypergraph; excludemodularity::Bool=false)
     data = Dict{Symbol, Any}()
     hedistribution = Dict{Int, Int}()
@@ -34,6 +36,33 @@ end
 
 function evaluatetwosecproperties(h::Hypergraph)
     t = TwoSectionView(h)
+    data= Dict{Symbol,Any}()
+    g=SimpleGraph(t)
+    push!(data, :e => ne(g))
+    push!(data, :connected_components =>connected_components(g))
+    push!(data, :size_lcc => size_lcc(g))
+    push!(data, :clustering_coefficient =>global_clustering_coefficient(g))
+    push!(data, :triangles_count =>triangles(g))
+    #push!(data, :density => density(is_directed(g),g))
+    push!(data, :max_degree =>maximum(degree(g)))
+    push!(data, :min_degree =>minimum(degree(g)))
+    push!(data, :average_degree =>avg_degree(g))
+    #push!(data, :max_kcore => k_core(g)) #k_core() returns as default max k_core if k is not specified
+    #push!(data, :max_cliques =>maximal_cliques(g))
+    data
+end
 
 
+function avg_degree(g::SimpleGraph)
+    avg = (2*ne(g))/nv(g)
+    avg
+end
+
+function size_lcc(g::SimpleGraph)
+    components = connected_components(g)
+    maxi = 0
+    for component in components
+        maxi = max(maxi,length(component))
+    end
+    maxi
 end
