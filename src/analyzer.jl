@@ -9,14 +9,12 @@ function evaluatehgproperties(h::Hypergraph; excludemodularity::Bool=false)
     push!(data, :he=>nhe(h))
     push!(data, :maxhesize=>maximum(length.(getvertices.(Ref(h), 1:data[:he]))))
     push!(data, :maxdegree=>maximum(length.(gethyperedges.(Ref(h), 1:data[:v]))))
-
     for he in 1:nhe(h)
         push!(
             hedistribution,
             length(getvertices(h, he)) => get(hedistribution, length(getvertices(h, he)), 0) + 1
             )
     end
-
     for v in 1:nhv(h)
         push!(
             vdistribution,
@@ -30,7 +28,6 @@ function evaluatehgproperties(h::Hypergraph; excludemodularity::Bool=false)
     # if !excludemodularity
     #     modularity()
     # end
-
     data
 end
 
@@ -39,16 +36,17 @@ function evaluatetwosecproperties(h::Hypergraph)
     data= Dict{Symbol,Any}()
     g=SimpleGraph(t)
     push!(data, :e => ne(g))
-    push!(data, :connected_components =>connected_components(g))
+    #push!(data, :connected_components =>connected_components(g))
     push!(data, :size_lcc => size_lcc(g))
     push!(data, :clustering_coefficient =>global_clustering_coefficient(g))
     push!(data, :triangles_count =>triangles(g))
-    #push!(data, :density => density(is_directed(g),g))
+    push!(data, :density => density(g))
     push!(data, :max_degree =>maximum(degree(g)))
     push!(data, :min_degree =>minimum(degree(g)))
     push!(data, :average_degree =>avg_degree(g))
-    #push!(data, :max_kcore => k_core(g)) #k_core() returns as default max k_core if k is not specified
-    #push!(data, :max_cliques =>maximal_cliques(g))
+    #two power law exponent
+    #modularity
+    #degreedistribution
     data
 end
 
