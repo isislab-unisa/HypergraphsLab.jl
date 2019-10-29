@@ -1,4 +1,4 @@
-function loadcircles(fname::AbstractString, T::Type{<:Real}, sep::AbstractChar)
+function load_twittercircles(fname::AbstractString, T::Type{<:Real}, sep::AbstractChar)
     h = Hypergraph{T}(0,0)
     weight = convert(T, 1)
     vertices_ids_mapping = Dict{Int, Int}() #map vertex_ids into consecutive ids
@@ -10,7 +10,7 @@ function loadcircles(fname::AbstractString, T::Type{<:Real}, sep::AbstractChar)
         for v_id in vertices_ids
             old_id = parse(Int, v_id)
             if !haskey(vertices_ids_mapping, old_id)
-                add_vertex!(h)
+                SimpleHypergraphs.add_vertex!(h)
                 vertices_ids_mapping[old_id] = new_id #map old_id into new_id
                 new_id += 1
             end

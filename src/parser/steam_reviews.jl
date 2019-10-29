@@ -22,7 +22,7 @@ function load_steam_reviews(fname::AbstractString, T::Type{<:Real}, vertex_name:
                 end
                 old_id = v_id[vertex_name]
                 if !haskey(vertices_ids_mapping,old_id)
-                    add_vertex!(h)
+                    SimpleHypergraphs.add_vertex!(h)
                     set_vertex_meta!(h,v_meta,new_id)
                     vertices_ids_mapping[old_id] = new_id
                     new_id+=1

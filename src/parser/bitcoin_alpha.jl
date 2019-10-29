@@ -19,7 +19,7 @@ function load_bitcoin_alpha(fname::AbstractString, T::Type{<:Real}, sep::Abstrac
             hyper_new_id+=1
             if !haskey(vertices_ids_mapping,app_vertex) #if vertex doesn't exists in Hypergraph
                 vertices_ids_mapping[app_vertex]=new_id
-                add_vertex!(h)
+                SimpleHypergraphs.add_vertex!(h)
                 new_id+=1
             end
             add_hyperedge!(h,vertices=Dict{Int,T}([(vertices_ids_mapping[app_vertex],weight)]))
@@ -29,7 +29,7 @@ function load_bitcoin_alpha(fname::AbstractString, T::Type{<:Real}, sep::Abstrac
         else #if hyperedge already exists in Hypergraph
             if !haskey(vertices_ids_mapping,app_vertex)
                 vertices_ids_mapping[app_vertex]=new_id
-                add_vertex!(h,hyperedges=Dict{Int,T}([(hyperedge_ids_mapping[app_edge],weight)]))
+                SimpleHypergraphs.add_vertex!(h,hyperedges=Dict{Int,T}([(hyperedge_ids_mapping[app_edge],weight)]))
                 new_id+=1
                 h_meta_vertex=Dict{Int,Any}()
                 h_meta_vertex[vertices_ids_mapping[app_vertex]]=h_meta

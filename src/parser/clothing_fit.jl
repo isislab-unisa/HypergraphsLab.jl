@@ -1,4 +1,4 @@
-function clothing_load_example(fname::AbstractString, T::Type{<:Real}, vertex_name::AbstractString, edge_name::AbstractString)
+function load_clothing(fname::AbstractString, T::Type{<:Real}, vertex_name::AbstractString, edge_name::AbstractString)
         h=Hypergraph{T,AbstractDict,AbstractDict}(0,0)
         weight = convert(T,1)
         vertices_ids_mapping = Dict{AbstractString,Int128}()
@@ -16,7 +16,7 @@ function clothing_load_example(fname::AbstractString, T::Type{<:Real}, vertex_na
             vertex_id=actual_object[vertex_name] #get vertex
             hyperedge_id=actual_object[edge_name] #get edge
             if !haskey(vertices_ids_mapping,vertex_id) #if vertex doesn't exist
-                add_vertex!(h) #create vertex
+                SimpleHypergraphs.add_vertex!(h) #create vertex
                 vertices_ids_mapping[vertex_id]=new_id #add vertex to Dict
                 new_id+=1
             end

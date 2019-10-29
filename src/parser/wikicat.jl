@@ -13,7 +13,7 @@ function loadwikicat(fname::AbstractString, T::Type{<:Real}, sep::AbstractChar,i
         for v_id in vertices_ids
             old_id = parse(Int128, v_id)
             if !haskey(vertices_ids_mapping, old_id)
-                add_vertex!(h)
+                SimpleHypergraphs.add_vertex!(h)
                 vertices_ids_mapping[old_id] = new_id
                 new_id +=1
                 nodes+=1

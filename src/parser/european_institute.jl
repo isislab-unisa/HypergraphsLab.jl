@@ -10,24 +10,20 @@ function load_european_institute(fname::AbstractString, T::Type{<:Real}, sep::Ab
     for line in eachline(io)
         vertex_2_edge =split(line,sep)[1:end] #instead of google and facebook, the first word of the line is a node
         app_vertex=parse(Int128,vertex_2_edge[1])
-        print("app_vertex:")
-        println(app_vertex)
         app_edge=parse(Int128,vertex_2_edge[2])
-        print("app_edge:")
-        println(app_edge)
         if !haskey(hyperedge_ids_mapping,app_edge)
             hyperedge_ids_mapping[app_edge]=hyper_new_id
             hyper_new_id+=1
             if !haskey(vertices_ids_mapping,app_vertex)
                 vertices_ids_mapping[app_vertex]=new_id
-                add_vertex!(h)
+                SimpleHypergraphs.add_vertex!(h)
                 new_id+=1
             end
             add_hyperedge!(h,vertices=Dict{Int,T}([(vertices_ids_mapping[app_vertex],weight)]))
         else
             if !haskey(vertices_ids_mapping,app_vertex)
                 vertices_ids_mapping[app_vertex]=new_id
-                add_vertex!(h,hyperedges=Dict{Int,T}([(hyperedge_ids_mapping[app_edge],weight)]))
+                SimpleHypergraphs.add_vertex!(h,hyperedges=Dict{Int,T}([(hyperedge_ids_mapping[app_edge],weight)]))
                 new_id+=1
             end
         end
