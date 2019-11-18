@@ -1,3 +1,4 @@
+using JSON
 function load_clothing(fname::AbstractString, T::Type{<:Real}, vertex_name::AbstractString, edge_name::AbstractString)
         h=Hypergraph{T,AbstractDict,AbstractDict}(0,0)
         weight = convert(T,1)

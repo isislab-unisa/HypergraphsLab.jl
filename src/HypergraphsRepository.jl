@@ -2,14 +2,14 @@ module HypergraphsRepository
 
 using SimpleHypergraphs
 
-export loadcircles, load_twittercircles, load_youtube
+export loadcircles, load_twittercircles, loadyoutube
 export loadfriendster, load_livejournal, loadorkut
 export loadamazon, loadgplus, load_european_institute
 export loadwikicat, loaddblp, load_clothing
 export load_bitcoin_otc, load_bitcoin_alpha
 export load_deezer
-export evaluatehgproperties, evaluatetwosecproperties
-export buildpost
+export evaluatehgproperties, evaluatetwosecproperties, export_properties
+export buildpost, getmetadata
 
 include("parser/facebook_circles.jl")
 include("parser/amazon.jl")
