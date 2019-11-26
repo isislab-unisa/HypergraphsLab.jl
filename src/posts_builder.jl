@@ -1,9 +1,10 @@
-function buildpost(h::Hypergraph,metafname::AbstractString,fname::AbstractString,)
+function buildpost(h::Hypergraph,metafname::AbstractString,fname::AbstractString)
     data = evaluatehgproperties(h)
     two_data =evaluatetwosecproperties(h)
     data=merge(data,two_data)
-    io=open("posts/"*fname*".md","w") # output file
+    io=open("posts/"*fname,"w") # output file
     iometa=open("graphdata/"*metafname,"r") # metadata input file
+    write(io,"---\n")
     for line in eachline(iometa)
         write(io,line) #copying the metadata in the output file
         write(io,"\n")
@@ -13,7 +14,7 @@ function buildpost(h::Hypergraph,metafname::AbstractString,fname::AbstractString
         write(io,": ")
         if (!(typeof(data[key])<:Dict))  #if it's a simple metric
             write(io,string(data[key]))
-        else                            # if it's a distributions or a collection of metrics
+        else                            # if it's a distribution or a collection of metrics
             start=1
             for dis in keys(data[key]) #formatting text for distributions
                 if (start!=1)
@@ -28,12 +29,14 @@ function buildpost(h::Hypergraph,metafname::AbstractString,fname::AbstractString
         end
         write(io,"\n")
     end
+    write(io,"---\n")
     close(io)
     data
 end
 
+"""
 function getmetadata(metafname::AbstractString)
-    io=open("graphdata/"*"/"*metafname,"r")
+    io=open("graphdata/"*metafname,"r")
     meta=Dict{AbstractString,AbstractString}()
     for line in eachline(io)
         line=split(line,": ")
@@ -41,3 +44,4 @@ function getmetadata(metafname::AbstractString)
     end
     meta
 end
+"""

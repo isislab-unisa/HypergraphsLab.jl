@@ -10,17 +10,25 @@ h_twitter = load_twittercircles("graphdata/twitter/356963.circles", Int, '\t')
 hg_save("hgdata/twitter/356963.circles.hgf", h_twitter)
 export_json("hgdata/twitter/356963.circles.json", h_twitter)
 
+h_imdb=load_imdb("graphdata/IMDB/data.tsv",Int,'\t',1,9)
+hg_save("hgdata/IMDB/data.hgf", h_imdb)
+export_json("hgdata/IMDB/data.json", h_imdb)
+
 h_steam = load_steam_reviews("graphdata/steam/australian_user_reviews.json",Int,"item_id", "reviews" ,"user_id") #input file formatted with double quotes
 hg_save("hgdata/steam/australian_user_reviews.hgf", h_steam)
 export_json("hgdata/steam/australian_user_reviews.json", h_steam)
 
-h_youtube = loadyoutube("graphdata/Youtube/com-youtube.all.cmty.txt",Int,'\t',1)
+h_youtube = loadyoutube("graphdata/Youtube/com-youtube.top5000.cmty.txt",Int,'\t',1)
 hg_save("hgdata/Youtube/com-youtube.top5000.cmty.hgf", h_youtube)
 export_json("hgdata/Youtube/com-youtube.top5000.cmty.json", h_youtube)
 
 h_friendster = loadfriendster("graphdata/Friendster/com-friendster.all.cmty.txt" ,Int, '\t',1)
 hg_save("hgdata/Friendster/com-friendster.all.cmty.hgf", h_friendster)
 export_json("hgdata/Friendster/com-friendster.all.cmty.json", h_friendster)
+
+h_friendster_top5000 = loadfriendster("graphdata/Friendster/com-friendster.top5000.cmty.txt" ,Int, '\t',1)
+hg_save("hgdata/Friendster/com-friendster.top5000.cmty.hgf", h_friendster_top5000)
+export_json("hgdata/Friendster/com-friendster.top5000.cmty.json", h_friendster_top5000)
 
 h_lj = loadlivejournal("graphdata/LiveJournal/com-lj.all.cmty.txt" ,Int, '\t',1)
 hg_save("hgdata/LiveJournal/com-lj.all.cmty.hgf", h_lj)

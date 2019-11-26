@@ -26,7 +26,7 @@ function evaluatehgproperties(h::Hypergraph; excludemodularity::Bool=false)
     # if !excludemodularity
     #     modularity()
     # end
-
+    push!(data,:size_lcc=>length(largest_cc_hg(h)))
     data
 end
 
@@ -58,7 +58,7 @@ function export_properties(h::Hypergraph,fname::AbstractString,dname::AbstractSt
     datatwosec=evaluatetwosecproperties(h)
     data=merge(datahg,datatwosec)
     jsondata=JSON.json(data)
-    io=open("hgdata/"*dname*"/"*fname*"properties.json","w")
+    io=open("hgdata/"*fname*"properties.json","w")
     write(io,jsondata)
     close(io)
 end
@@ -91,6 +91,49 @@ end
 
 function largest_cc(g::SimpleGraph)
     components = connected_components(g)
+    lcc_vlist=Array{Int64,1}()
+    for component in components
+        l_comp=length(component)
+        if (max(length(lcc_vlist),l_comp)==l_comp)
+            lcc_vlist=component
+        end
+    end
+    lcc_vlist
+end
+
+function vertex_finder(h::Hypergraph,he :: Int,he_list::Array{Int,1})
+    v_app=collect(keys(getvertices(h,he)))
+    he_app=Array{Int,1}()
+    for v in v_app
+        he_app=gethyperedges(h,v)
+        push!(he_list,he)
+        for h_pop in he_list
+            if (h_pop in keys(he_app))
+                pop!(he_app,h_pop)
+            end
+        end
+        for h_en in collect(keys(he_app))
+            v_app=unique(vcat(v_app, vertex_finder(h,h_en,he_list)))
+        end
+    end
+    return v_app
+end
+
+function connected_components_hg(h::Hypergraph)
+    v_list=collect(keys(h.v2he))
+    he_list=collect(keys(h.he2v))
+    he_fill=Array{Int,1}()
+    cc_list=Array{Array{Int,1},1}()
+    for he in he_list
+        if !( he in he_fill)
+            push!(cc_list,vertex_finder(h,he,he_fill))
+        end
+    end
+    cc_list
+end
+
+function largest_cc_hg(h::Hypergraph)
+    components = connected_components_hg(h)
     lcc_vlist=Array{Int64,1}()
     for component in components
         l_comp=length(component)
